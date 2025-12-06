@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>To HER ❤ — A message to SAANVI</title>
+  <meta name="description" content="A short, honest message — from Saran." />
+  <meta name="theme-color" content="#FFF7FB">
+
+  <!-- Safe system fonts (no external import) -->
+  <style>
+    :root{
+      --bg: #FFF7FB;
+      --card: #ffffff;
+      --muted: #6B6B74;
+      --accent: #FF6B9F;
+      --accent-2: #FFD1E3;
+      --text: #2B2230;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial, sans-serif;color:var(--text);background:var(--bg);}
+    a{color:inherit}
+
+    /* page layout */
+    .wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:28px}
+    .card{width:100%;max-width:680px;background:var(--card);border-radius:18px;box-shadow:0 18px 50px rgba(23,18,28,0.08);padding:32px;position:relative;overflow:hidden}
+
+    header{display:flex;gap:16px;align-items:center}
+    .logo{width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#ff8db3);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-family:Georgia,serif;font-size:26px}
+    h1{margin:0;font-family:Georgia,serif;font-size:22px}
+    p.lead{margin:8px 0 0;color:var(--muted);line-height:1.45}
+
+    main{margin-top:18px}
+    .message{background:linear-gradient(180deg,rgba(255,209,227,0.75),rgba(255,255,255,0.6));padding:20px;border-radius:14px;text-align:left;line-height:1.6;color:var(--text);font-size:16px}
+
+    .meta{margin-top:14px;color:var(--muted);font-size:14px}
+
+    .actions{display:flex;gap:10px;justify-content:flex-end;margin-top:18px}
+    .btn{border:0;padding:10px 14px;border-radius:12px;font-weight:600;cursor:pointer}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),#ff8db3);color:white}
+    .btn-soft{background:linear-gradient(90deg,var(--accent-2),#fff);}
+
+    .hearts{pointer-events:none;position:absolute;inset:0;overflow:hidden}
+    .heart{position:absolute;width:20px;height:20px;transform-origin:center bottom;opacity:0}
+    .heart:before,.heart:after{content:'';position:absolute;width:12px;height:20px;border-radius:12px 12px 0 0;background:linear-gradient(180deg,#ff7aa4,#ff4f83)}
+    .heart:before{left:5px;transform:rotate(-45deg)}
+    .heart:after{right:5px;transform:rotate(45deg)}
+    @keyframes floatUp{0%{transform:translateY(30px) scale(.6);opacity:0}10%{opacity:1}100%{transform:translateY(-320px) scale(1);opacity:0}}
+
+    /* LOYAL emphasis animation */
+    .loyal{font-weight:800;letter-spacing:.03em;color:var(--accent);position:relative}
+    .loyal::after{content:'';position:absolute;left:0;right:0;bottom:-6px;height:6px;background:linear-gradient(90deg,var(--accent-2),transparent);border-radius:6px;transform:scaleX(0);transform-origin:left;transition:transform .36s ease}
+    .loyal.show::after{transform:scaleX(1)}
+
+    /* small footer */
+    .footer{margin-top:18px;font-size:13px;color:var(--muted);text-align:center}
+
+    /* responsive */
+    @media (max-width:520px){.card{padding:20px}.logo{width:52px;height:52px;font-size:20px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card" role="main">
+      <div class="hearts" aria-hidden="true"></div>
+
+      <header>
+        <div class="logo">S</div>
+        <div>
+          <h1>To HER ❤</h1>
+          <p class="lead">A message to <strong>SAANVI</strong> — short, honest, and from the heart.</p>
+        </div>
+      </header>
+
+      <main>
+        <div class="message" id="message">
+          <p>
+            From the first day I saw you — back in 8th grade, sitting on the 4th bench — I knew something was different. Ever since we left that school, I never thought about having a crush on anyone else.
+          </p>
+
+          <p>
+            It has been <strong>902 days</strong>, <strong>21,648 hours</strong>, and <strong>77,932,800 seconds</strong>.
+          </p>
+
+          <p>
+            Back then I didn’t feel very confident about how I looked, but I’ve worked on myself a lot since — for you and for me — and I’ll keep improving.
+          </p>
+
+          <p>
+            I don’t want to make promises I can’t keep, but I do promise one thing: I will be <span class="loyal" id="loyal">LOYAL</span> to you, no matter what happens.
+          </p>
+
+          <p style="margin-top:8px;color:var(--muted)">
+            I don’t want to pressure you — the choice is yours and I will respect your decision.
+          </p>
+
+          <p style="margin-top:12px;font-weight:700">XOXO — Saran</p>
+        </div>
+
+        <div class="meta">Tip: best experienced on mobile. You can copy this link and send it in an Instagram DM.</div>
+
+        <div class="actions">
+          <button class="btn btn-soft" id="copyBtn">Copy Link</button>
+          <button class="btn btn-primary" id="revealBtn">Share & Reveal</button>
+        </div>
+
+    
+      </main>
+    </div>
+  </div>
+
+  <script>
+    // chime via WebAudio API (no external file; plays only after a user gesture)
+    function playChime(){
+      try{
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const now = ctx.currentTime;
+        const o = ctx.createOscillator();
+        const g = ctx.createGain();
+        o.type = 'sine';
+        o.frequency.setValueAtTime(880, now);
+        g.gain.setValueAtTime(0, now);
+        g.gain.linearRampToValueAtTime(0.12, now + 0.01);
+        g.gain.linearRampToValueAtTime(0, now + 0.9);
+        o.connect(g);
+        g.connect(ctx.destination);
+        o.start(now);
+        o.frequency.linearRampToValueAtTime(1320, now + 0.25);
+        o.stop(now + 0.9);
+      }catch(e){console.warn('Audio not available',e)}
+    }
+
+    // copy link
+    const copyBtn = document.getElementById('copyBtn');
+    copyBtn.addEventListener('click', ()=>{
+      navigator.clipboard.writeText(window.location.href).then(()=>{
+        copyBtn.textContent = 'Link Copied';
+        setTimeout(()=>copyBtn.textContent='Copy Link',1600);
+      }).catch(()=>{alert('Copy failed — select the link and copy manually.')});
+    });
+
+    const revealBtn = document.getElementById('revealBtn');
+    const loyal = document.getElementById('loyal');
+    revealBtn.addEventListener('click', ()=>{
+      loyal.classList.add('show');
+      spawnHearts(18);
+      playChime();
+      // also copy link as friendly gesture
+      try{navigator.clipboard.writeText(window.location.href)}catch(e){}
+      revealBtn.textContent = 'Copied & Ready';
+      setTimeout(()=>{revealBtn.textContent='Share & Reveal'},2500);
+    });
+
+    // play chime button
+    document.getElementById('playChime').addEventListener('click', ()=>{playChime();document.getElementById('playChime').textContent='Played';setTimeout(()=>document.getElementById('playChime').textContent='Play Chime',1200)});
+
+    // hearts generator
+    function spawnHearts(n){
+      const container = document.querySelector('.hearts');
+      for(let i=0;i<n;i++){
+        const h = document.createElement('div');
+        h.className = 'heart';
+        const left = Math.random()*100;
+        const delay = Math.random()*0.6;
+        const dur = 2.6 + Math.random()*1.4;
+        h.style.left = left + '%';
+        h.style.bottom = Math.random()*24 + 'px';
+        h.style.animation = `floatUp ${dur}s linear ${delay}s forwards`;
+        container.appendChild(h);
+        setTimeout(()=>h.remove(), (delay+dur)*1000 + 300);
+      }
+    }
+
+    // allow keyboard
+    revealBtn.addEventListener('keyup',(e)=>{if(e.key==='Enter')revealBtn.click()});
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+body{
+ background-color: #FFF3F8;
+}
+.h2-1{
+ color: #3A243B;
+ text-align: center;
+ font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+p{
+font-family:'Courier New', Courier, monospace; 
+}
+
+@media all and (max-width:500px){
+ p{
+  font-size: 22px;
+ }
+}
+.p-1{
+ text-align: center;
+}
+
+#result {
+  margin-top: 15px;
+  font-size: 22px;
+  font-weight: 600;
+}
+.text{
+ vertical-align: top;
+ width: 300px;
+ border-radius: 5px;
+ border: none;
+ background-color: transparent;
+ display: flex;
+ flex: 1;
+ align-content: center;
+}
+.text::after{
+  border: solid red;
+}
+.div{
+ background-color: white;
+
+}
+.div-2{
+ background-color: #FFF3F8;
+ width: 1400px;
+}
+@media all (max-width:500px;){
+ .div-2{
+  width: 380px;
+ }
+}
